@@ -8,7 +8,19 @@ class Post(models.Model):
     content = models.TextField()
     published_at = models.DateTimeField(auto_now_add=True)
     category = models.CharField(max_length=200)
-    tags = models.CharField(max_length=500)  # We can also create a separate model for tags if required
+    tags = models.CharField(max_length=500)
+    tags = models.ManyToManyField('Tag')
+
+    def __str__(self):
+        return self.title
+
+
+########################################################################
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
 ########################################################################
