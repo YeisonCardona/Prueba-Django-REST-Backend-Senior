@@ -22,6 +22,6 @@ class Command(BaseCommand):
                 author=random.choice(User.objects.all()),
                 category=faker.word(),
             )
-            post.tags.add(*random.sample(tags, k=random.randint(1, len(tags))))
+            post.tags.add(*random.sample(tags, k=random.randint(0, 5)))
 
         self.stdout.write(self.style.SUCCESS(f'{num_posts} posts created with success!'))
