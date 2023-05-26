@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_filters',
+    # 'drf_yasg',
 
     'users.apps.UsersConfig',
     'posts.apps.PostsConfig',
@@ -129,12 +132,14 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'users.User'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -142,4 +147,30 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 16,
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+}
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
+    # 'ROTATE_REFRESH_TOKENS': False,
+    # 'BLACKLIST_AFTER_ROTATION': True,
+    # 'UPDATE_LAST_LOGIN': False,
+
+    # 'ALGORITHM': 'HS256',
+    # 'SIGNING_KEY': SECRET_KEY,
+    # 'VERIFYING_KEY': None,
+    # 'AUDIENCE': None,
+    # 'ISSUER': None,
+
+    # 'AUTH_HEADER_TYPES': ('Bearer',),
+    # 'USER_ID_FIELD': 'id',
+    # 'USER_ID_CLAIM': 'user_id',
+
+    # 'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    # 'TOKEN_TYPE_CLAIM': 'token_type',
+
+    # 'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    # 'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    # 'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }

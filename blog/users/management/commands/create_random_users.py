@@ -1,6 +1,8 @@
 from django.core.management.base import BaseCommand
 from faker import Faker
 from users.models import User, Profile
+import csv
+import os
 
 
 class Command(BaseCommand):
@@ -12,19 +14,35 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         fake = Faker()
         total = kwargs['total']
+        created_users = []
+
+        credentials = []
         for _ in range(total):
-            User.objects.create_user(
-                username=fake.unique.user_name(),
+            credentials.append([fake.unique.user_name(),
+                                fake.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True),
+                                fake.random_element(elements=('admin', 'editor', 'blogger'))
+                                ])
+            created_users.append(User.objects.create_user(
+                username=credentials[-1][0],
                 email=fake.unique.email(),
-                password=fake.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True),
-                role=fake.random_element(elements=('admin', 'editor', 'blogger'))
-            )
+                password=credentials[-1][1],
+                role=credentials[-1][2],
+            ))
         self.stdout.write(self.style.SUCCESS(f'{total} users created with success!'))
 
-        for user in User.objects.all():
+        for user in created_users:
             Profile.objects.create(
                 user=user,
                 bio=fake.text(max_nb_chars=200),
                 image=None  # Since faker can't generate an image, setting this to None
             )
+
         self.stdout.write(self.style.SUCCESS(f'{total} profiles created with success!'))
+
+        with open(os.path.join('faker', 'users.csv'), 'w') as f:
+            writer = csv.writer(f)
+            writer.writerow(['username', 'password', 'role'])
+            for row in credentials:
+                writer.writerow(row)
+
+

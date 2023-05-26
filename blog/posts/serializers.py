@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Post, Comment, Like, Tag
+from users.models import User
 
 
 ########################################################################
@@ -9,26 +10,50 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ['name', 'id']
 
 
+########################################################################
 class PostSerializer(serializers.ModelSerializer):
     author_username = serializers.CharField(source='author.username', read_only=True)
     author_id = serializers.IntegerField(source='author.pk', read_only=True)
-    tags = serializers.SlugRelatedField(
-        many=True,
-        read_only=True,
-        slug_field='name'
-     )
+    tags = serializers.SlugRelatedField(many=True, read_only=True, slug_field='name')
 
     class Meta:
         model = Post
         fields = ['id', 'author_username', 'author_id', 'title', 'content',
                   'published_at', 'category', 'tags']
 
+    # ----------------------------------------------------------------------
     def to_representation(self, instance):
         data = super().to_representation(instance)
         if self.context.get('nested'):
             data.pop('author_username')
             data.pop('author_id')
         return data
+
+    # ----------------------------------------------------------------------
+    def create(self, validated_data):
+        tags_data = self.initial_data.pop('tags')
+        author_id = self.initial_data.pop('author_id')
+        author = User.objects.get(pk=author_id)
+        post = Post.objects.create(author=author, **validated_data)
+
+        for tag_name in tags_data:
+            tag, created = Tag.objects.get_or_create(name=tag_name)
+            post.tags.add(tag)
+
+        return post
+
+    # ----------------------------------------------------------------------
+    def update(self, instance, validated_data):
+        tags_data = self.initial_data.pop('tags')
+        instance = super().update(instance, validated_data)
+
+        if tags_data is not None:
+            instance.tags.clear()
+            for tag_name in tags_data:
+                tag, created = Tag.objects.get_or_create(name=tag_name)
+                instance.tags.add(tag)
+
+        return instance
 
 
 ########################################################################
@@ -54,9 +79,10 @@ class LikeSerializer(serializers.ModelSerializer):
         model = Like
         fields = ['id', 'user_username', 'user_id', 'post', 'comment']
 
+    # ----------------------------------------------------------------------
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        if self.context.get('nested'):  # Check if the context specifies that this is a nested serializer
-            data.pop('user_username')  # If it is, remove the 'user' field from the serialized data
+        if self.context.get('nested'):
+            data.pop('user_username')
             data.pop('user_id')
         return data

@@ -10,16 +10,10 @@ class Post(models.Model):
     category = models.CharField(max_length=200)
     tags = models.ManyToManyField('Tag')
 
-    def __str__(self):
-        return self.title
-
 
 ########################################################################
 class Tag(models.Model):
     name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
 
 
 ########################################################################
