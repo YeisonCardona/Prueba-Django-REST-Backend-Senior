@@ -60,13 +60,27 @@ class PostSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
 
     user_username = serializers.CharField(source='user.username', read_only=True)
-    user_id = serializers.IntegerField(source='user.id', read_only=True)
+    user_id = serializers.IntegerField(source='user.id')
     post_title = serializers.CharField(source='post.title', read_only=True)
-    post_id = serializers.IntegerField(source='post.id', read_only=True)
+    post_id = serializers.IntegerField(source='post.id')
 
     class Meta:
         model = Comment
         fields = ['id', 'user_username', 'user_id', 'post_title', 'post_id', 'text']
+
+    # ----------------------------------------------------------------------
+    def create(self, validated_data):
+        user_id = validated_data.pop('user')
+        user = User.objects.get(pk=user_id['id'])
+        post_id = validated_data.pop('post')
+        post = Post.objects.get(pk=post_id['id'])
+        comment = Comment.objects.create(user=user, post=post, **validated_data)
+        return comment
+
+    # ----------------------------------------------------------------------
+    def update(self, instance, validated_data):
+        instance = super().update(instance, validated_data)
+        return instance
 
 
 ########################################################################
@@ -86,3 +100,10 @@ class LikeSerializer(serializers.ModelSerializer):
             data.pop('user_username')
             data.pop('user_id')
         return data
+
+    # ----------------------------------------------------------------------
+    def create(self, validated_data):
+        user_id = self.initial_data.copy().pop('user_id')
+        user = User.objects.get(pk=user_id)
+        comment = Like.objects.create(user=user, **validated_data)
+        return comment

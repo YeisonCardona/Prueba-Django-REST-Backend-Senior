@@ -54,5 +54,5 @@ class IsBlogger(permissions.BasePermission):
             return bool(
                 request.user and
                 (request.user.is_superuser or request.user.role == 'blogger') and
-                obj.author == request.user
+                getattr(obj, 'user', getattr(obj, 'author', None)) == request.user
             )

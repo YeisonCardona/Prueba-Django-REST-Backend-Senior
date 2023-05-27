@@ -15,8 +15,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     # ----------------------------------------------------------------------
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        if self.context.get('nested'):  # Check if the context specifies that this is a nested serializer
-            data.pop('username')  # If it is, remove the 'user' field from the serialized data
+        if self.context.get('nested'):
+            data.pop('username')
             data.pop('user_id')
         return data
 
@@ -48,14 +48,15 @@ class UserSerializer(serializers.ModelSerializer):
 
     # ----------------------------------------------------------------------
     def create(self, validated_data):
-        profile_data = self.initial_data.pop('profile')
+        profile_data = self.initial_data.copy().get('profile', None)
         user = User.objects.create(**validated_data)
-        Profile.objects.create(user=user, **profile_data)
+        if profile_data:
+            Profile.objects.create(user=user, **profile_data)
         return user
 
     # ----------------------------------------------------------------------
     def update(self, instance, validated_data):
-        profile_data = self.initial_data.pop('profile', None)
+        profile_data = self.initial_data.copy().get('profile', None)
         instance = super().update(instance, validated_data)
 
         if profile_data is not None:
