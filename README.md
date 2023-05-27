@@ -1,57 +1,72 @@
-# Prueba-Django-REST-Backend-Senior
+```python
 
-## Objetivo:
-Desarrollar una API RESTful para una plataforma de blog con funcionalidades
-avanzadas utilizando Django REST Framework y Python como lenguaje de
-programación principal.
+```
 
-## Descripción del Proyecto:
-La plataforma de blog consta de varias entidades: Usuarios, Perfiles, Entradas
-(Posts), Comentarios y Likes. Los Usuarios pueden tener roles de administrador,
-editor o blogger. Los Usuarios tienen un Perfil asociado con información
-adicional como la biografía y la imagen de perfil. Las Entradas están asociadas
-a un Usuario (el autor) e incluyen un título, contenido, fecha de publicación,
-categoría y una lista de etiquetas (tags). Los Comentarios están vinculados a
-un Usuario (la persona que comenta) y a una Entrada, e incluyen el texto del
-comentario. Los Usuarios pueden dar Like tanto a Entradas como a Comentarios.
+# Prueba-Django-REST-Backend-Senior - Getting started
 
-## Requisitos del proyecto:
+Welcome to our Django REST API project! This API allows for managing users, user profiles, blog posts, comments, likes and tags. Whether you are an admin, editor, or blogger, you can use this API to meet your requirements and manage all your content in a structured and efficient manner.
 
- 1. **Modelado de Datos:** Diseña e implementa modelos de datos para Usuario,
- Perfil, Entrada, Comentario y Like.
- 1. **Autenticación y Autorización:** Implementa un sistema de autenticación y
- autorización que permita a los administradores gestionar todos los recursos,
- a los editores gestionar Entradas, Comentarios y Likes, y a los bloggers crear
- y gestionar sus propias Entradas, Comentarios y Likes.
- 1. **API Endpoints:** Implementa los siguientes endpoints:
-	 * CRUD de Usuarios y Perfiles
-	 * CRUD de Entradas
-	 * CRUD de Comentarios
-	 * CRUD de Likes
- 1. **Serialización:** Emplea los serializadores de Django REST para manejar
-    la conversión entre modelos y JSON.
- 1. **Filtros y Paginación:** Implementa filtros que permitan buscar
-    entradas por título, autor, categoría y etiquetas. Además,
-    implementa la paginación en los endpoints que devuelven múltiples
-    recursos.
- 1. **Pruebas:** Desarrolla pruebas unitarias y de integración para los
-    modelos, la autenticación, la autorización y los endpoints de la
-    API. Asegúrate de cubrir tanto los casos de éxito como los de error.
- 1. **Documentación:** Documenta todos los endpoints de la API utilizando
-    Django REST Swagger o similar.
+## Installation (from GitHub)
 
-## Instrucciones de entrega:
-Por favor, sube tu solución a un repositorio de GitHub y comparte el enlace con
-nosotros. Asegúrate de incluir un archivo README con instrucciones detalladas
-sobre cómo instalar y ejecutar el proyecto, cómo ejecutar las pruebas, y
-cualquier información relevante.
+To get started, you need to clone the repository from GitHub to your local machine. After cloning the repo, navigate to the main project directory and install the required dependencies using pip. Here's how you do it:
 
-## Fecha límite:
-Te pedimos que completes y envíes la prueba técnica el día
-**Viernes 26 de Mayo del 2023 11:59pm (GTM-5)**
 
-## Criterios de evaluación:
-Nuestro equipo evaluará la calidad del código, el cumplimiento de los
-requisitos, la selección de herramientas y técnicas utilizadas, la cobertura de
-las pruebas, la correcta implementación de la paginación y los filtros, así
-como la calidad de la documentación de la API.
+```python
+$ git clone https://github.com/YeisonCardona/Prueba-Django-REST-Backend-Senior.git
+$ cd Prueba-Django-REST-Backend-Senior
+$ pip install -r requirements.txt 
+```
+
+## Setting up
+
+Before you can start using the application, you need to set up your database. Django makes this easy with the 'migrate' command, which will create the necessary database tables according to your models. After setting up your database, you need to create a superuser account that has all permissions to manage the API:
+
+
+```python
+$ cd blog
+$ python manage.py migrate
+$ python manage.py createsuperuser --username superuser --email super@mail.com
+```
+
+## Generate test dataset
+
+You can populate your database with some test data. This is useful for testing out the API's functionality before deploying it to a live environment. To generate the test data, run the 'create_fake_data.sh' script. The output will tell you how many users, profiles, tags, posts, comments, and likes were created:
+
+
+```python
+$ . ./create_fake_data.sh
+```
+
+
+```python
+16 users created with success!
+16 profiles created with success!
+32 tags created with success!
+64 posts created with success!
+256 comments created with success!
+1024 likes created with success!
+```
+
+Now, you're all set! You can start exploring the API and testing its features.
+
+## DRF - Web browsable API 
+[http://localhost:8000/](http://localhost:8000/)
+
+This link leads to the Django Rest Framework (DRF) Web Browsable API for our project. This interface allows for easy navigation, creation, and manipulation of the API endpoints directly from the web browser. It's perfect for quick testing and debugging, providing a user-friendly interface for interacting with our data models. 
+
+Note: Please ensure that the server is running locally on your machine for this link to work. You can start the server using the following command in the root directory of the project: `python manage.py runserver`
+
+## DRF - Web browsable API 
+[http://localhost:8000/swagger/](http://localhost:8000/swagger/)
+
+
+This link leads to the Swagger UI documentation of our API. Swagger is a set of open-source tools built around the OpenAPI Specification that can help you design, build, document, and use REST APIs. It makes it easy for developers to understand and work with our API by providing an interactive documentation with a sleek user interface. 
+
+The Swagger UI allows you to explore and interact with all the API endpoints, observe the responses, and even try out different parameters and body requests. 
+
+Note: Please ensure that the server is running locally on your machine for this link to work. You can start the server using the following command in the root directory of the project: `python manage.py runserver`
+
+
+```python
+
+```
