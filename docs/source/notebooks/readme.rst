@@ -77,8 +77,8 @@ for this link to work. You can start the server using the following
 command in the root directory of the project:
 ``python manage.py runserver``
 
-DRF - Web browsable API
------------------------
+Swagger UI documentation
+------------------------
 
 http://localhost:8000/swagger/
 
@@ -88,12 +88,29 @@ help you design, build, document, and use REST APIs. It makes it easy
 for developers to understand and work with our API by providing an
 interactive documentation with a sleek user interface.
 
-The Swagger UI allows you to explore and interact with all the API
-endpoints, observe the responses, and even try out different parameters
-and body requests.
-
 Note: Please ensure that the server is running locally on your machine
 for this link to work. You can start the server using the following
 command in the root directory of the project:
 ``python manage.py runserver``
 
+Read the Docs
+-------------
+
+https://prueba-django-rest-backend-senior.readthedocs.io/en/latest/
+
+This link will take you to our project’s documentation hosted on Read
+the Docs. Here you’ll find detailed information about the project’s
+structure, functionality, and how to use it. The documentation is
+carefully written to guide you through the setup process, demonstrate
+the usage of the project, and provide insights into the codebase.
+
+GitHub
+------
+
+https://github.com/YeisonCardona/Prueba-Django-REST-Backend-Senior
+
+The link above directs you to our project’s GitHub repository. Here, you
+can access the complete codebase, check the latest commits, download the
+source code, or clone the repository for your own use. The repository
+provides a comprehensive view of the project’s development history and
+its current state.
