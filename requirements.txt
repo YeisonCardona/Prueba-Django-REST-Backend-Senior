@@ -5,3 +5,4 @@ Markdown==3.4.3
 Pillow==9.5.0
 djangorestframework-simplejwt==5.2.2
 Faker==18.9.0
+drf-yasg==1.21.5
