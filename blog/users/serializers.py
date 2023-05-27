@@ -33,8 +33,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     # ----------------------------------------------------------------------
     def get_profile(self, obj):
-        profile = ProfileSerializer(obj.profile, context={'nested': True})
-        return profile.data
+        if hasattr(obj, 'profile'):
+            profile = ProfileSerializer(obj.profile, context={'nested': True})
+            return profile.data
+        return {}
 
     # ----------------------------------------------------------------------
     def get_posts(self, obj):
