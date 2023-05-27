@@ -1,0 +1,4 @@
+.. automodule:: users.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:

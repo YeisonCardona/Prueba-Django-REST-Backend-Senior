@@ -23,7 +23,7 @@ comentario. Los Usuarios pueden dar Like tanto a Entradas como a Comentarios.
  autorización que permita a los administradores gestionar todos los recursos,
  a los editores gestionar Entradas, Comentarios y Likes, y a los bloggers crear
  y gestionar sus propias Entradas, Comentarios y Likes.
- 1. **API Endpoints:** Implementa los siguientes endpoints>
+ 1. **API Endpoints:** Implementa los siguientes endpoints:
 	 * CRUD de Usuarios y Perfiles
 	 * CRUD de Entradas
 	 * CRUD de Comentarios
