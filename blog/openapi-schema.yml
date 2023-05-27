@@ -1,0 +1,1724 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /users/:
+    get:
+      operationId: listUsers
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: role
+        required: false
+        in: query
+        description: role
+        schema:
+          type: string
+          enum:
+          - admin
+          - editor
+          - blogger
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
+        schema:
+          type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - users
+    post:
+      operationId: createUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - users
+  /users/{id}/:
+    get:
+      operationId: retrieveUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      - name: role
+        required: false
+        in: query
+        description: role
+        schema:
+          type: string
+          enum:
+          - admin
+          - editor
+          - blogger
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
+        schema:
+          type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - users
+    put:
+      operationId: updateUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      - name: role
+        required: false
+        in: query
+        description: role
+        schema:
+          type: string
+          enum:
+          - admin
+          - editor
+          - blogger
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
+        schema:
+          type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - users
+    patch:
+      operationId: partialUpdateUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      - name: role
+        required: false
+        in: query
+        description: role
+        schema:
+          type: string
+          enum:
+          - admin
+          - editor
+          - blogger
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
+        schema:
+          type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - users
+    delete:
+      operationId: destroyUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      - name: role
+        required: false
+        in: query
+        description: role
+        schema:
+          type: string
+          enum:
+          - admin
+          - editor
+          - blogger
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
+        schema:
+          type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - users
+  /profiles/:
+    get:
+      operationId: listProfiles
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: bio_contains
+        required: false
+        in: query
+        description: bio_contains
+        schema:
+          type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Profile'
+          description: ''
+      tags:
+      - profiles
+    post:
+      operationId: createProfile
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Profile'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+      tags:
+      - profiles
+  /profiles/{id}/:
+    get:
+      operationId: retrieveProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: bio_contains
+        required: false
+        in: query
+        description: bio_contains
+        schema:
+          type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+      tags:
+      - profiles
+    put:
+      operationId: updateProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: bio_contains
+        required: false
+        in: query
+        description: bio_contains
+        schema:
+          type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Profile'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+      tags:
+      - profiles
+    patch:
+      operationId: partialUpdateProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: bio_contains
+        required: false
+        in: query
+        description: bio_contains
+        schema:
+          type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Profile'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+      tags:
+      - profiles
+    delete:
+      operationId: destroyProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: bio_contains
+        required: false
+        in: query
+        description: bio_contains
+        schema:
+          type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - profiles
+  /posts/:
+    get:
+      operationId: listPosts
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: author_username
+        required: false
+        in: query
+        description: author_username
+        schema:
+          type: string
+      - name: title
+        required: false
+        in: query
+        description: title
+        schema:
+          type: string
+      - name: content
+        required: false
+        in: query
+        description: content
+        schema:
+          type: string
+      - name: published_after
+        required: false
+        in: query
+        description: published_after
+        schema:
+          type: string
+      - name: published_before
+        required: false
+        in: query
+        description: published_before
+        schema:
+          type: string
+      - name: category
+        required: false
+        in: query
+        description: category
+        schema:
+          type: string
+      - name: tags
+        required: false
+        in: query
+        description: tags
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Post'
+          description: ''
+      tags:
+      - posts
+    post:
+      operationId: createPost
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Post'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+          description: ''
+      tags:
+      - posts
+  /posts/{id}/:
+    get:
+      operationId: retrievePost
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this post.
+        schema:
+          type: string
+      - name: author_username
+        required: false
+        in: query
+        description: author_username
+        schema:
+          type: string
+      - name: title
+        required: false
+        in: query
+        description: title
+        schema:
+          type: string
+      - name: content
+        required: false
+        in: query
+        description: content
+        schema:
+          type: string
+      - name: published_after
+        required: false
+        in: query
+        description: published_after
+        schema:
+          type: string
+      - name: published_before
+        required: false
+        in: query
+        description: published_before
+        schema:
+          type: string
+      - name: category
+        required: false
+        in: query
+        description: category
+        schema:
+          type: string
+      - name: tags
+        required: false
+        in: query
+        description: tags
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+          description: ''
+      tags:
+      - posts
+    put:
+      operationId: updatePost
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this post.
+        schema:
+          type: string
+      - name: author_username
+        required: false
+        in: query
+        description: author_username
+        schema:
+          type: string
+      - name: title
+        required: false
+        in: query
+        description: title
+        schema:
+          type: string
+      - name: content
+        required: false
+        in: query
+        description: content
+        schema:
+          type: string
+      - name: published_after
+        required: false
+        in: query
+        description: published_after
+        schema:
+          type: string
+      - name: published_before
+        required: false
+        in: query
+        description: published_before
+        schema:
+          type: string
+      - name: category
+        required: false
+        in: query
+        description: category
+        schema:
+          type: string
+      - name: tags
+        required: false
+        in: query
+        description: tags
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Post'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+          description: ''
+      tags:
+      - posts
+    patch:
+      operationId: partialUpdatePost
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this post.
+        schema:
+          type: string
+      - name: author_username
+        required: false
+        in: query
+        description: author_username
+        schema:
+          type: string
+      - name: title
+        required: false
+        in: query
+        description: title
+        schema:
+          type: string
+      - name: content
+        required: false
+        in: query
+        description: content
+        schema:
+          type: string
+      - name: published_after
+        required: false
+        in: query
+        description: published_after
+        schema:
+          type: string
+      - name: published_before
+        required: false
+        in: query
+        description: published_before
+        schema:
+          type: string
+      - name: category
+        required: false
+        in: query
+        description: category
+        schema:
+          type: string
+      - name: tags
+        required: false
+        in: query
+        description: tags
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Post'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+          description: ''
+      tags:
+      - posts
+    delete:
+      operationId: destroyPost
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this post.
+        schema:
+          type: string
+      - name: author_username
+        required: false
+        in: query
+        description: author_username
+        schema:
+          type: string
+      - name: title
+        required: false
+        in: query
+        description: title
+        schema:
+          type: string
+      - name: content
+        required: false
+        in: query
+        description: content
+        schema:
+          type: string
+      - name: published_after
+        required: false
+        in: query
+        description: published_after
+        schema:
+          type: string
+      - name: published_before
+        required: false
+        in: query
+        description: published_before
+        schema:
+          type: string
+      - name: category
+        required: false
+        in: query
+        description: category
+        schema:
+          type: string
+      - name: tags
+        required: false
+        in: query
+        description: tags
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - posts
+  /tags/:
+    get:
+      operationId: listTags
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tag'
+          description: ''
+      tags:
+      - tags
+    post:
+      operationId: createTag
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Tag'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: ''
+      tags:
+      - tags
+  /tags/{id}/:
+    get:
+      operationId: retrieveTag
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tag.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: ''
+      tags:
+      - tags
+    put:
+      operationId: updateTag
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tag.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Tag'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: ''
+      tags:
+      - tags
+    patch:
+      operationId: partialUpdateTag
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tag.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Tag'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: ''
+      tags:
+      - tags
+    delete:
+      operationId: destroyTag
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tag.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - tags
+  /comments/:
+    get:
+      operationId: listComments
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: user_username
+        required: false
+        in: query
+        description: user_username
+        schema:
+          type: string
+      - name: post_title
+        required: false
+        in: query
+        description: post_title
+        schema:
+          type: string
+      - name: text
+        required: false
+        in: query
+        description: text
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - comments
+    post:
+      operationId: createComment
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - comments
+  /comments/{id}/:
+    get:
+      operationId: retrieveComment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this comment.
+        schema:
+          type: string
+      - name: user_username
+        required: false
+        in: query
+        description: user_username
+        schema:
+          type: string
+      - name: post_title
+        required: false
+        in: query
+        description: post_title
+        schema:
+          type: string
+      - name: text
+        required: false
+        in: query
+        description: text
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - comments
+    put:
+      operationId: updateComment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this comment.
+        schema:
+          type: string
+      - name: user_username
+        required: false
+        in: query
+        description: user_username
+        schema:
+          type: string
+      - name: post_title
+        required: false
+        in: query
+        description: post_title
+        schema:
+          type: string
+      - name: text
+        required: false
+        in: query
+        description: text
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - comments
+    patch:
+      operationId: partialUpdateComment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this comment.
+        schema:
+          type: string
+      - name: user_username
+        required: false
+        in: query
+        description: user_username
+        schema:
+          type: string
+      - name: post_title
+        required: false
+        in: query
+        description: post_title
+        schema:
+          type: string
+      - name: text
+        required: false
+        in: query
+        description: text
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - comments
+    delete:
+      operationId: destroyComment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this comment.
+        schema:
+          type: string
+      - name: user_username
+        required: false
+        in: query
+        description: user_username
+        schema:
+          type: string
+      - name: post_title
+        required: false
+        in: query
+        description: post_title
+        schema:
+          type: string
+      - name: text
+        required: false
+        in: query
+        description: text
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - comments
+  /likes/:
+    get:
+      operationId: listLikes
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Like'
+          description: ''
+      tags:
+      - likes
+    post:
+      operationId: createLike
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Like'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Like'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Like'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Like'
+          description: ''
+      tags:
+      - likes
+  /likes/{id}/:
+    get:
+      operationId: retrieveLike
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this like.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Like'
+          description: ''
+      tags:
+      - likes
+    put:
+      operationId: updateLike
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this like.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Like'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Like'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Like'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Like'
+          description: ''
+      tags:
+      - likes
+    patch:
+      operationId: partialUpdateLike
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this like.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Like'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Like'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Like'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Like'
+          description: ''
+      tags:
+      - likes
+    delete:
+      operationId: destroyLike
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this like.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - likes
+  /api/token/:
+    post:
+      operationId: createTokenObtainPair
+      description: 'Takes a set of user credentials and returns an access and refresh
+        JSON web
+
+        token pair to prove the authentication of those credentials.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+      tags:
+      - api
+  /api/token/refresh/:
+    post:
+      operationId: createTokenRefresh
+      description: 'Takes a refresh type JSON web token and returns an access type
+        JSON web
+
+        token if the refresh token is valid.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+      tags:
+      - api
+  /api/token/verify/:
+    post:
+      operationId: createTokenVerify
+      description: 'Takes a token and indicates if it is valid.  This view provides
+        no
+
+        information about a token''s fitness for a particular use.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenVerify'
+          description: ''
+      tags:
+      - api
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+\z
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        role:
+          enum:
+          - admin
+          - editor
+          - blogger
+          type: string
+        profile:
+          type: string
+          readOnly: true
+        posts:
+          type: string
+          readOnly: true
+        likes:
+          type: string
+          readOnly: true
+      required:
+      - username
+    Profile:
+      type: object
+      properties:
+        username:
+          type: string
+          readOnly: true
+        user_id:
+          type: integer
+          readOnly: true
+        bio:
+          type: string
+          nullable: true
+        image:
+          type: string
+          format: binary
+          nullable: true
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        author_username:
+          type: string
+          readOnly: true
+        author_id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        content:
+          type: string
+        published_at:
+          type: string
+          format: date-time
+          readOnly: true
+        category:
+          type: string
+          maxLength: 200
+        tags:
+          type: array
+          items:
+            type: string
+          readOnly: true
+      required:
+      - title
+      - content
+      - category
+    Tag:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        id:
+          type: integer
+          readOnly: true
+      required:
+      - name
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user_username:
+          type: string
+          readOnly: true
+        user_id:
+          type: integer
+          readOnly: true
+        post_title:
+          type: string
+          readOnly: true
+        post_id:
+          type: integer
+          readOnly: true
+        text:
+          type: string
+      required:
+      - text
+    Like:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user_username:
+          type: string
+          readOnly: true
+        user_id:
+          type: integer
+          readOnly: true
+        post:
+          type: integer
+          nullable: true
+        comment:
+          type: integer
+          nullable: true
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - username
+      - password
+    TokenRefresh:
+      type: object
+      properties:
+        refresh:
+          type: string
+        access:
+          type: string
+          readOnly: true
+      required:
+      - refresh
+    TokenVerify:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+      - token
